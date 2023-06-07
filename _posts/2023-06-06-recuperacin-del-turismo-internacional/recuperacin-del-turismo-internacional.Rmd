@@ -1,0 +1,300 @@
+---
+title: "Crecimiento del turismo receptivo"
+description: |
+  En abril de este año el turismo receptivo en Argentina superó el nivel del mismo mes prepandemia.
+date: 2023-06-07
+output:
+  distill::distill_article:
+    self_contained: true
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+library(tidyverse)
+library(comunicacion)
+library(herramientas)
+library(ggtext)
+library(googlesheets4)
+library(tidytext)
+library(zoo)
+library(plotly)
+library(glue)
+```
+
+### El camino de la recuperación del turismo internacional en el mundo
+
+La pandemia de COVID-19 tuvo en el turismo internacional uno de los impactos más severos y perdurables. Las llegadas de turistas internacionales a nivel mundial tuvo una caída interanual del 72,2% en 2020, del 68,9% en 2021 y 34,3% en 2022 contra el año 2019.
+En Sudamérica, por su parte, el desplome de las llegadas de turistas fue más profundo, especialmente en el año 2021: la caída respecto de 2019 fue de 72,4% ,85% y 38,8% en 
+el trienio 2020-2022. El primer trimestre del año 2023 muestra una tendencia a la reducción
+de la caída, pero aún no logra alcanzar los niveles previos a la crisis: -20,4% para el 
+Mundo y -18,3% para Sudamérica respecto del primer trimestre de 2019.[^fuente-omt]
+
+[^fuente-omt]: los datos surgen de la compilación que hace la Organización Mundial del 
+Turismo (OMT), publicados en el último Barómetro del Turismo Mundial (edición mayo 2023)
+
+```{r}
+googlesheets4::gs4_deauth()
+turismo_mundo <- read_sheet("https://docs.google.com/spreadsheets/d/12z46U9VrM9RL_wmt-NH7bJ3VuSICLDBlr6ZC-8bMvqc/edit?usp=sharing", 
+                            sheet = "5.turismo_en_el_mundo" )
+
+# Gráfico 20 - TURISMO EN EL MUNDO #
+
+data_serie_tur_internacional_mundo <- read_sheet("https://docs.google.com/spreadsheets/d/1O-RQY8m1_kSmJxpAZEv19Lcfe1oRcq_Ltur3lgH1Mf4/edit#gid=98183415", 
+                                                 sheet = 1)
+
+# Cargo etiquetas de regiones y subregiones
+etiquetas_mundo <- read_file_srv("/DataDNMYE/imet/etiquetas_variables.xlsx", sheet = 4)
+
+data_grafico_20 <- data_serie_tur_internacional_mundo %>% 
+  pivot_longer(cols = c(3:length(.)), names_to = "indicador", values_to = "n") %>% 
+  left_join(etiquetas_mundo, by = c("indicador" = "region")) %>%
+  mutate(n = as.numeric(n),
+         resultado = case_when(n > 0 & grepl('vs22$', period) ~ "positivo",
+                               n < 0 & grepl('vs22$', period) ~ "negativo",
+                               grepl('vs19$', period) ~ "vs2019"),
+         destacada_colour = case_when(indicador == "mund" ~ "destaca", 
+                                      TRUE ~ "no_destaca"),
+         etiqueta_reg = factor(etiqueta_reg, 
+                               levels = c("Europa", "Asia y el Pacífico", "Américas", "África", "Oriente Medio")),
+         etiqueta_sub_reg = factor(etiqueta_sub_reg,
+                                   levels = rev(c("Europa del Norte", 
+                                                  "Europa Occidental", "Europa Central / Oriental", 
+                                                  "Europa Meridional / Medit.", 
+                                                  "Asia del Nordeste", "Asia del Sudeste", "Oceanía", 
+                                                  "Asia Meridional", "América del Norte",
+                                                  "El Caribe", "América Central", "América del Sur", 
+                                                  "África del Norte", "África Subsahariana",
+                                                  "Oriente Medio")))
+         #etiqueta_sub_reg = reorder_within(etiqueta_sub_reg, n, etiqueta_reg)
+  )
+
+# GRAFICO
+region_etiquetas <- c("Europa" = paste0("Europa \n", 
+                                        data_grafico_20$n[data_grafico_20$indicador == "euro" & data_grafico_20$resultado != "vs2019"], "%", " vs 2022, \n", 
+                                        data_grafico_20$n[data_grafico_20$indicador == "euro" & data_grafico_20$resultado == "vs2019"], "%", " vs 2019"),
+                      "Asia y el Pacífico" = paste0("Asia y el Pacífico \n", 
+                                                    data_grafico_20$n[data_grafico_20$indicador == "asia_pac" & data_grafico_20$resultado != "vs2019"], "%", " vs 2022, \n",
+                                                    data_grafico_20$n[data_grafico_20$indicador == "asia_pac" & data_grafico_20$resultado == "vs2019"], "%", " vs 2019"),
+                      "Américas" = paste0("América \n", 
+                                          data_grafico_20$n[data_grafico_20$indicador == "amer" & data_grafico_20$resultado != "vs2019"], "%", " vs 2022 \n",
+                                          data_grafico_20$n[data_grafico_20$indicador == "amer" & data_grafico_20$resultado == "vs2019"], "%", " vs 2019"),
+                      "África"= paste0("África \n", 
+                                       data_grafico_20$n[data_grafico_20$indicador == "afric" & data_grafico_20$resultado != "vs2019"], "%", " vs 2022, \n",
+                                       data_grafico_20$n[data_grafico_20$indicador == "afric" & data_grafico_20$resultado == "vs2019"], "%", " vs 2019"),
+                      "Oriente Medio" = paste0("Oriente Medio \n", 
+                                               data_grafico_20$n[data_grafico_20$indicador == "medioor" & data_grafico_20$resultado != "vs2019"], "%", " vs 2022, \n",
+                                               data_grafico_20$n[data_grafico_20$indicador == "medioor" & data_grafico_20$resultado == "vs2019"], "%", " vs 2019"))
+data_grafico_20 <- data_grafico_20 %>% 
+  mutate(n_modif = ifelse(n>280,300,n))
+
+
+grafico_20 <- ggplot(data = filter(data_grafico_20, indicador %out%
+                                     c("mund", "euro", "asia_pac", "amer", "afric")),
+                     aes(x = reorder_within(etiqueta_sub_reg, -n, etiqueta_reg),
+                         y = n_modif, fill = resultado)
+                     ) +
+  geom_col(aes(y=n_modif), width = 1, position = "dodge") +
+  geom_text(aes(y= ifelse(n_modif >0, n_modif+30, n_modif - 20), label = paste0(format(n,decimal.mark = ","), "%")),
+            size =2.5, 
+            # hjust = 1.1,
+            family = "Encode Sans",
+            position = position_dodge(width = 1)) +
+  geom_hline(yintercept = 0, size = 0.1) +
+  scale_fill_manual(values = c("negativo" = dnmye_colores(1), 
+                               "positivo" = dnmye_colores(5),
+                               "vs2019" = "darkgrey"
+  )) +
+  scale_colour_manual(values = c("destaca" = dnmye_colores(1),
+                                 "no_destaca" = "black")) +
+  scale_x_reordered(expand = expansion(add = 1)) +
+  ylim(-100,350) +
+  ggpattern::geom_crossbar_pattern(data = filter(data_grafico_20 ,period == "23vs22"& n_modif ==300), #corte de barras ad hoc
+                                   aes(ymin = 260, ymax = 263),
+                                   width = .5,
+                                   size = 0.01,
+                                   fill = 'white',
+                                   colour = "white",
+                                   pattern_fill    = 'black',
+                                   pattern_colour  = 'black',
+                                   pattern_spacing = 0.05) +
+  #ylim(-100, 850) +
+   theme_minimal() +
+  facet_grid(facets = "etiqueta_reg", scales = "free", space = "free", switch = "x",
+             labeller = as_labeller(region_etiquetas))+
+   coord_flip(clip = "off") +
+  theme(
+    text = element_text(family = "Encode Sans"), 
+    plot.title =  element_markdown(size=11.5,face = "bold"),
+    plot.subtitle = element_markdown(size=10, face = "bold"),
+    plot.caption  = element_markdown(),
+    axis.text.x   = element_text(),
+    axis.text.y   = element_markdown(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line( size = .1),
+    legend.position = "none",
+    strip.placement = "outside",
+    strip.text.x = element_text(),
+    strip.text.y = element_text(),
+    strip.text.y.right = element_text(angle = 0,size=6)
+  ) +
+  labs(title = str_to_sentence("LLEGADAS DE TURISTAS INTERNACIONALES POR REGIÓN Y SUBREGIÓN DE DESTINO"),
+       x="",y="",
+       subtitle = glue("1° trim 2023 <span style='color:#50B8B1'>var. vs. 2021</span> y <span style='color:#999999'>var. vs. 2019</span>.<br> Mundo: 86% i.a. y -20,4% vs. 2019."),
+       caption = "**Fuente**: DNMyE en base al Barómetro de la OMT edición mayo 2023") 
+
+grafico_20
+
+```
+
+
+### La situación regional del turismo receptivo internacional
+
+```{r}
+
+argentina <- read_file_srv('/DataDNMYE/turismo_internacional/turismo_internacional_visitantes.rds')
+
+```
+
+
+```{r}
+
+argentina_receptivo <- argentina %>% 
+  filter(turismo_internac == "Receptivo") %>% 
+  group_by(fecha = ym(paste0(anio, mes))) %>% 
+  summarise(arg_tur =  sum(casos_ponderados[tipo_visitante == "Turistas"]),
+            arg_visit = sum(casos_ponderados))
+
+receptivo_regional <- read_file_srv('/DataDNMYE/economia2/TERMOMETRO/Tur_receptivo_paises.xlsx')
+
+# emisivo_regional <- read_file_srv('/DataDNMYE/economia2/TERMOMETRO/Tur_emisivo_paises.xlsx')
+
+receptivo_regional <- left_join(argentina_receptivo,
+                                receptivo_regional %>% select(-c(arg_tur)))
+
+receptivo_regional <- receptivo_regional %>% 
+  pivot_longer(cols = -fecha,names_to = c("pais", "tipo_visitante"),
+               values_to="casos", names_sep = "_") %>% 
+   mutate(pais = case_when(
+    str_detect(pais, "arg") ~ "Argentina",
+    str_detect(pais, "paraguay") ~ "Paraguay",
+    str_detect(pais, "peru") ~ "Perú",
+    str_detect(pais, "chile") ~ "Chile",
+    str_detect(pais, "col") ~ "Colombia",
+    str_detect(pais, "mx") ~ "México",
+    str_detect(pais, "bolivia") ~ "Bolivia",
+    str_detect(pais, "ec") ~ "Ecuador",
+    str_detect(pais, "ur") ~ "Uruguay",
+    str_detect(pais, "br") ~ "Brasil",
+    T ~ pais),
+      tipo_visitante = case_when(
+        tipo_visitante == "tur" ~ "Turistas",
+        tipo_visitante == "visit" ~ "Visitantes"
+      )
+    ) 
+
+receptivo_regional <- receptivo_regional %>% 
+  mutate(trimestre = quarter(fecha, with_year = T)) %>% 
+  group_by(pais, trimestre, tipo_visitante) %>% 
+  summarise(casos = sum(casos)) %>%
+  group_by(pais, tipo_visitante) %>% 
+  summarise(recup_ia = casos[trimestre == 2023.1]/casos[trimestre == 2022.1],
+            recup_19 = casos[trimestre == 2023.1]/casos[trimestre == 2019.1]) %>% 
+  filter(!is.na(recup_19)) %>% 
+  group_by(tipo_visitante) %>% 
+  mutate(pais_x = reorder_within(pais, (recup_19), tipo_visitante)) %>% 
+  pivot_longer(cols = c(recup_ia, recup_19), names_to = 'indicador', values_to = 'valor')
+
+```
+
+En la región Argentina se destaca como uno de los países con mejor desempeño en la recuperación del turismo receptivo internacional durante el primer trimestre de 2023. Es el primer país en el ranking de recuperación respecto a igual trimestre de 2019 en términos de turistas con un valor del 87,9% y el segundo en términos de visitantes con una recuperación del 109,4%, superando el nivel del primer trimestre 2019.
+
+
+```{r}
+
+facet_title_1 <- function(x) {str_wrap(glue::glue("Ranking de recuperación del turismo receptivo en {tolower(x)}"), 40)}
+
+p1 <- receptivo_regional %>% 
+  filter(indicador != 'recup_ia') %>% 
+  ggplot(aes(x = pais_x, y = valor, fill = pais)) +
+    geom_col(position = position_dodge2()) +
+    geom_text(aes(y = valor + 0.15, label = lbl_percent(valor)), size = 3) +
+    scale_x_reordered() +
+    facet_wrap(~ tipo_visitante, scales = 'free_y', labeller = as_labeller(facet_title_1)) +
+    coord_flip(clip = "off") +
+    scale_y_continuous(labels = ~ lbl_percent(.x, decimales = 0), 
+                       breaks = c(.25,.5,.75,1), minor_breaks = F,
+                                              expand = expansion(add = 0.1)) +
+    scale_fill_dnmye() +
+    theme_minimal()+
+    guides(fill = 'none') +
+    ylab('') + xlab('') +
+    labs(title = 'Recuperación del turismo receptivo internacional en Sudámerica',
+         subtitle = 'Enero a Marzo 2023')
+
+p1
+
+```
+
+### Evolución del turismo receptivo internacional en Argentina
+
+La tendencia mensual de recuperación del turismo receptivo internacional en Argentina se aceleró a partir de los últimos meses de 2022, llegando incluso a superar los niveles prepandemia tanto en términos de visitantes a partir de enero 2023, como en términos de turistas a partir de abril 2023.
+
+```{r}
+argentina_receptivo <- argentina_receptivo %>% 
+  mutate(mes =  month(fecha))
+
+p2_data <- argentina_receptivo %>% 
+  left_join(argentina_receptivo %>% filter(year(fecha) == 2019), by = "mes") %>% 
+  rename(fecha = fecha.x) %>% 
+  filter(year(fecha) >= 2020) %>% 
+  mutate(nvl_tur_b19 =  100*arg_tur.x/arg_tur.y, 
+         nvl_vis_b19 = 100*arg_visit.x/arg_visit.y)
+
+anotacion1 <- tibble(x = ym('2023-01'), y = 100, label = "100% de recuperación \nde visitantes")
+
+anotacion2 <- tibble(x = ym('2023-04'), y = 106, label = "106% de recuperación \nde turistas")
+  
+p2_data %>% 
+  ggplot() +
+  ggrepel::geom_label_repel(data = anotacion1, aes(x = x, y = y, label = label),
+                            nudge_x = -240, nudge_y = 10, size = 2.5,
+                            segment.curvature = -.4,
+                            min.segment.length = 0) +
+   ggrepel::geom_label_repel(data = anotacion2, aes(x = x, y = y, label = label),
+                            nudge_x = -210, nudge_y = 30, size = 2.5,
+                            segment.curvature = -.4,
+                            min.segment.length = 0) +
+  geom_line(aes(x = fecha, y = nvl_tur_b19, color = 'Turistas'),
+            # color = dnmye_colores('naranja'),
+            size = .5) +
+  geom_point(aes(x = fecha, y = nvl_tur_b19,  color = 'Turistas'),
+             # color = dnmye_colores('naranja'),
+             size = 2) +
+  geom_line(aes(x = fecha, y = nvl_vis_b19,  color = 'Visitantes'),
+            # color = dnmye_colores('cian'),
+            size = .5) +
+  geom_point(aes(x = fecha, y = nvl_vis_b19,  color = 'Visitantes'),
+             # color = dnmye_colores('cian'),
+             size = 2) +
+  scale_x_date(date_breaks = 'month', date_labels = '%b %y', expand = expansion(add=5), minor_breaks = NULL) +
+  scale_y_continuous(breaks = seq(0,100, 20), minor_breaks = NULL) +
+  geom_vline(xintercept = ymd('2020-03-01'), color = "red") +
+  annotate(x = ymd('2020-08-01'),  y = 110, label = "Inicio de la cuarentena\npor pandemia COVID-19", geom = "label", size =  2.5) +
+  ylab('') + xlab('') +
+  scale_color_manual(values = c('Turistas' = dnmye_colores('naranja'),
+                               'Visitantes' = dnmye_colores('cian')), name = "Tipo de Visitantes") +
+  theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "top")
+
+
+```
+
+### Comportamiento de la recuperación por mercado
+
+

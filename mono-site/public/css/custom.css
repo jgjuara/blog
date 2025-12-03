@@ -1,0 +1,24 @@
+/* Estilo del menú con subrayado */
+body {
+    background-color: #F5F5F5 !important;
+}
+
+.menu a {
+    background: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    text-decoration: none;
+    border-bottom: .2rem solid #008cff;
+}
+  /* Unificar estilos para todos los estados del enlace */
+.menu a:link,
+.menu a:visited,
+.menu a:active {
+    color: inherit !important;
+    border-bottom: .2rem solid #008cff;
+}
+
+.menu a:hover {
+    border-bottom-color: #8e0000;
+}
+

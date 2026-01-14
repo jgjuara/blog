@@ -1,6 +1,22 @@
 /* Estilo del menú con subrayado */
+html {
+    min-height: 90vh;
+}
+
 body {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
     background-color: #F5F5F5 !important;
+}
+
+body > nav {
+    flex-shrink: 0;
+}
+
+body > footer {
+    flex-shrink: 0;
+    margin-top: auto;
 }
 
 .menu a {
@@ -22,3 +38,7 @@ body {
     border-bottom-color: #8e0000;
 }
 
+/* para seccion poesía */
+main.poesia-content {
+    white-space: pre-line;
+}

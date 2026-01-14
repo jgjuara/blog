@@ -1,0 +1,38 @@
+---
+title: "El canto de la sirena"
+date: 2024-01-15
+draft: false
+---
+
+{{< m-izq 30 >}}
+*Para Mar que siempre tuvo simpatía por las sirenas*
+{{< /m-izq >}}
+todo lo que toca el mar
+todo lo que lame
+sol y iodo y tierra
+áspera lengua
+
+todo lo que acaricia
+como saboreando un helado
+
+todo lo que devora y engulle
+todo lo que abriga
+en su panza
+de una gran ballena
+
+
+todo lo que reverbera
+con su murmullo
+todo lo que devuelve
+como un eco desgarrado
+
+
+todo lo que no puede
+soltarse de sus amarras
+y anda a la deriva
+en la tierra
+con el mar
+adentro
+
+
+

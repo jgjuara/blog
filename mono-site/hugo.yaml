@@ -4,7 +4,7 @@ title: "Juan Gabriel Juara"
 theme: "hugo-xmin"
 googleAnalytics: ""
 disqusShortname: ""
-ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
+ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.template\\.md$"]
 footnotereturnlinkcontents: "↩"
 enableEmoji: True
 
@@ -26,7 +26,7 @@ menu:
 
 params:
   description: "A website built through Hugo and blogdown."
-  footer: "&copy; [Yihui Xie](https://yihui.org) 2017 -- {Year} | [Github](https://github.com/yihui) | [BlueSky](https://bsky.app/profile/yihui.org)"
+  footer: "&copy; Juan Gabriel Juara {Year} | [Github](https://github.com/jgjuara) | [LinkedIn](https://www.linkedin.com/in/jgjuara/)"
 
 markup:
   highlight:

@@ -9,30 +9,29 @@ draft: false
 {{< /m-izq >}}
 todo lo que toca el mar
 todo lo que lame
-sol y iodo y tierra
-áspera lengua
+con su lengua
+de sol y iodo y tierra
 
 todo lo que acaricia
-como saboreando un helado
+como saboreando
+un helado sobre la arena
 
 todo lo que devora y engulle
 todo lo que abriga
 en su panza
-de una gran ballena
-
+de gran ballena
 
 todo lo que reverbera
 con su murmullo
 todo lo que devuelve
 como un eco desgarrado
 
-
 todo lo que no puede
 soltarse de sus amarras
 y anda a la deriva
 en la tierra
 con el mar
-adentro
+¡adentro!
 
 
 

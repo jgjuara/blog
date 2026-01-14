@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on Juan Gabriel Juara</title>
-    <link>http://localhost:1313/jgjuara/mono/</link>
+    <link>http://localhost:1313/mono/</link>
     <description>Recent content in Home on Juan Gabriel Juara</description>
     <generator>Hugo</generator>
     <language>es</language>
     <lastBuildDate>Mon, 15 Jan 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/jgjuara/mono/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/mono/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>El canto de la sirena</title>
-      <link>http://localhost:1313/jgjuara/mono/poesia/el-canto-de-la-sirena/</link>
+      <link>http://localhost:1313/mono/poesia/el-canto-de-la-sirena/</link>
       <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/jgjuara/mono/poesia/el-canto-de-la-sirena/</guid>
+      <guid>http://localhost:1313/mono/poesia/el-canto-de-la-sirena/</guid>
       <description>&lt;p&gt;&#xD;&#xA;&lt;div style=&#34;margin-left: 30em;&#34;&gt; &lt;em&gt;Para Mar que siempre tuvo simpatía por las sirenas&lt;/em&gt; &lt;/div&gt;&#xD;&#xA;&#xA;todo lo que toca el mar&#xA;todo lo que lame&#xA;sol y iodo y tierra&#xA;áspera lengua&lt;/p&gt;&#xA;&lt;p&gt;todo lo que acaricia&#xA;como saboreando un helado&lt;/p&gt;&#xA;&lt;p&gt;todo lo que devora y engulle&#xA;todo lo que abriga&#xA;en su panza&#xA;de una gran ballena&lt;/p&gt;&#xA;&lt;p&gt;todo lo que reverbera&#xA;con su murmullo&#xA;todo lo que devuelve&#xA;como un eco desgarrado&lt;/p&gt;&#xA;&lt;p&gt;todo lo que no puede&#xA;soltarse de sus amarras&#xA;y anda a la deriva&#xA;en la tierra&#xA;con el mar&#xA;adentro&lt;/p&gt;</description>
     </item>
     <item>
       <title>Home</title>
-      <link>http://localhost:1313/jgjuara/mono/bio/</link>
+      <link>http://localhost:1313/mono/bio/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/jgjuara/mono/bio/</guid>
+      <guid>http://localhost:1313/mono/bio/</guid>
       <description>&lt;h1 id=&#34;bio&#34;&gt;Bio&lt;/h1&gt;&#xA;&lt;p&gt;Soy Juan Gabriel Juara. Nací en 1990. Mi infancia conjugó una versión noventista de bajo presupuesto. PH propio pero sin refaccionar, más una promesa de potencia que otra cosa. No hubo viaje a Disney, ni Brasil, sino Mina Clavero y Villa Gesell, la casa de Mar del Plata de los abuelos. No hubo caviar ni champagne, aunque sí huevo kinder a mansalva. Sí llegó una PC, la playstation sobre el final del ciclo. Blockbuster fin de semana por medio. De mi infancia recuerdo algunas peleas con mis hermanos, algunos juegos con ellos, objetos comunes: las horas frente a la pantalla hasta la madrugada a escondidas de nuestros padres, jugar y no jugar a la batalla campal, espacir por la casa también algo de un teatro fantástico. Recuerdo también la amenaza y el castigo de mis padres o mis abuelos: el tirón de oreja, el cachetazo, la puteada, recuerdo la bronca sórdida de sentir que eso era injusto, recuerdo el miedo y el deseo de escapar de ese poder arbitrario y sin ley. Recuerdo también algunos momentos de cariño: mi viejo leyendonos La Ilíada, mi vieja leyendonos El Hobbit o cantando una canción de su militancia cristiana antes de dormir.&lt;br&gt;&#xA;Recuerdo algunos amigos de infancia. David el primero. Con él me sentía más seguro, que el mundo podría abrirse a nuestra voluntad a pesar de todo. Recuerdo una primera novia, tengo un recuerdo borroso de la tristeza de buscar sus rizos rubios y no encontrarlos en el acto de cierre de grado.&lt;/p&gt;</description>
     </item>
   </channel>

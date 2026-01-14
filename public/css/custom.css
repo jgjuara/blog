@@ -19,6 +19,10 @@ body > footer {
     margin-top: auto;
 }
 
+.menu li {
+    margin-right: 0;
+}
+
 .menu a {
     background: none !important;
     padding: 0 !important;

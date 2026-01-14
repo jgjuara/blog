@@ -23,7 +23,7 @@ menu:
 
 params:
   description: "A website built through Hugo and blogdown."
-  footer: "&copy; Juan Gabriel Juara {Year} | [Github](https://github.com/jgjuara) | [LinkedIn](https://www.linkedin.com/in/jgjuara/)"
+  footer: "&copy; Juan Gabriel Juara {Year} | [Github](https://github.com/jgjuara)"
 
 markup:
   highlight:

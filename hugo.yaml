@@ -1,4 +1,4 @@
-baseurl: "https://github.io/jgjuara/mono/"  # please update this to your actual URL
+baseurl: "https://jgjuara.github.io/mono/"
 languageCode: "es"
 title: "Juan Gabriel Juara"
 theme: "hugo-xmin"

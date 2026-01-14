@@ -17,12 +17,9 @@ menu:
     - name: Home
       url: ""
       weight: 1
-    - name: Notas
-      url: "notas/"
-      weight: 2
     - name: Poesía
       url: poesia/
-      weight: 3
+      weight: 2
 
 params:
   description: "A website built through Hugo and blogdown."

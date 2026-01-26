@@ -1,7 +1,7 @@
 ---
-title: "Borrador"
-date: 
-draft: true
+title: "Cuaderno vivo"
+date: 2090-08-25
+draft: false
 ---
 
 ####

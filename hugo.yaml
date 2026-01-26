@@ -17,8 +17,8 @@ menu:
     - name: Home
       url: ""
       weight: 1
-    - name: Poesía
-      url: poesia/
+    - name: Poemas
+      url: poemas/
       weight: 2
 
 params:

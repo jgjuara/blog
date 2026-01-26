@@ -1,2 +1,2 @@
 {{ $espacios := default "0" (.Get 0)}}
-<div style="margin-left: {{$espacios}}em;"> {{.Inner | markdownify}} </div>
+<span style="margin-left: {{$espacios}}em;"> {{.Inner | markdownify}} </span>

@@ -46,3 +46,7 @@ body > footer {
 main.poesia-content {
     white-space: pre-line;
 }
+
+.poesia-content p {
+    margin: 0.25em 0;
+}

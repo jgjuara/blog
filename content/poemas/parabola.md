@@ -11,7 +11,7 @@ pierdo el rumbo
 
 doy vueltas en una elipsis insólita
 te veo enfrente mío
-y sigo dando vueltas
+pero sigo dando vueltas
 
 las polillas evolucionamos
 para guiarnos con las estrellas
@@ -19,9 +19,9 @@ como los griegos
 
 tu proximidad es un milagro insoportable
 
-en algún punto de la deriva elíptica
+en algún punto de la deriva
 me doy de frente
-                reboto
+{{< m-izq "10" >}}reboto{{</m-izq>}}
 y vuelvo
 
 a acercarme lo suficiente

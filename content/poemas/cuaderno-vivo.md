@@ -1,6 +1,6 @@
 ---
 title: "Cuaderno vivo"
-date: 2090-08-25
+date: 2025-02-13
 draft: false
 ---
 

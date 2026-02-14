@@ -1,6 +1,6 @@
 ---
 title: "Cuaderno vivo"
-date: 2025-02-13
+date: 2026-02-13
 draft: false
 ---
 

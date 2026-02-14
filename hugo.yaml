@@ -10,7 +10,6 @@ enableEmoji: True
 
 permalinks:
   poesia: "/poesia/:slug"
-  notas: "/notas/:slug/:year-:month-:day/"
 
 menu:
   main:

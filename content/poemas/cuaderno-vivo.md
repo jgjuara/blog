@@ -4,7 +4,7 @@ date: 2090-08-25
 draft: false
 ---
 
-####
+### 1
 
 me pregunto
 ¿hay naranjas en tu mañana?
@@ -32,12 +32,12 @@ me pregunto
 por naranjas
 en tu día
 
-####
+### 2
 
 el fuego es el elemento más sincero
 por eso es el corazón del hogar
 
-####
+### 3
 
 qué dolor mirarme en el espejo
 el agua entra y sale de la bahía

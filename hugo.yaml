@@ -1,4 +1,4 @@
-baseurl: "https://jgjuara.github.io/mono/"
+baseurl: "https://jgjuara.github.io/blog/"
 languageCode: "es"
 title: "Juan Gabriel Juara"
 theme: "hugo-xmin"
@@ -10,6 +10,7 @@ enableEmoji: True
 
 permalinks:
   poesia: "/poesia/:slug"
+  notas: "/notas/:slug/:year-:month-:day/"
 
 menu:
   main:

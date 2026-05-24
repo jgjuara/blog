@@ -3,6 +3,9 @@ title: "Rememorar"
 date: 2026-05-20
 draft: false
 ---
+{{< m-izq 20 >}}
+*a Mar*
+{{< /m-izq >}}
 
 Con la cabeza apoyada 
 sobre el sol que entra
